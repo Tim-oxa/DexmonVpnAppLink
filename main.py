@@ -20,4 +20,4 @@ async def index():
     return redirect(url)
 
 
-app.run("127.0.0.1", int(os.getenv("PORT")))
+app.run("0.0.0.0", int(os.getenv("PORT")))
