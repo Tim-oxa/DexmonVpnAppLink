@@ -1,23 +1,23 @@
 from quart import Quart, request, redirect
-import config
+import os
 
 
 app = Quart("Dexmon VPN App Link")
 
 
-@app.get(config.PATH)
+@app.get(os.getenv("PATH"))
 async def index():
     if "Mac" in request.user_agent.string:
-        url = config.MAC_URL
+        url = os.getenv("MAC_URL")
     elif "Windows" in request.user_agent.string:
-        url = config.WINDOWS_URL
+        url = os.getenv("WINDOWS_URL")
     elif "iPhone" in request.user_agent.string:
-        url = config.IOS_URL
+        url = os.getenv("IOS_URL")
     elif "Android" in request.user_agent.string:
-        url = config.ANDROID_URL
+        url = os.getenv("ANDROID_URL")
     else:
-        url = config.OTHER_URL
+        url = os.getenv("OTHER_URL")
     return redirect(url)
 
 
-app.run("127.0.0.1", config.PORT)
+app.run("127.0.0.1", os.getenv("PORT"))
